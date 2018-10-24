@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.mycompany</groupId>
+	<artifactId>samplemuledevops1</artifactId>
+    <version>1.4</version>
+    <packaging>pom</packaging>
+	<name>samplemuledevops1</name>
+   
+   <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<mule.version>3.9.0</mule.version>
+    	<mule.tools.version>1.2</mule.tools.version>
+	</properties>
+
+		<build>
+		 
+		 
+		 
+			<plugins>
+                <plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-app-maven-plugin</artifactId>
+				<version>1.2</version>
+				<extensions>true</extensions>
+				<configuration>
+                    <copyToAppsDirectory>true</copyToAppsDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-install-plugin</artifactId>
+            <version>2.5.2</version>
+			
+        </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				  	  
+
+						
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.mule.tools.maven</groupId>
+					<artifactId>mule-app-maven-plugin</artifactId>
+					<version>1.2</version>
+					<extensions>true</extensions>
+					<configuration>
+						<copyToAppsDirectory>true</copyToAppsDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.mule.tools.maven</groupId>
+					<artifactId>mule-maven-plugin</artifactId>
+					<version>2.2.1</version>
+						 
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>1.7</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	 
+	 <profiles>
+      <profile>
+			<id>cloudhub</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<configuration>
+							<deploymentType>cloudhub</deploymentType>
+							<muleVersion>3.9.1</muleVersion>
+							<username>sriaariganesh</username>
+							<password>Dob@11051982</password>
+							<applicationName>samplemuledevops</applicationName>
+							<environment>Sandbox</environment>
+							 
+							<region>us-east-1</region>
+							<uri>https://anypoint.mulesoft.com/</uri>
+							<workerType>Small</workerType>
+							<workers>1</workers>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>arm</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mule.tools.maven</groupId>
+						<artifactId>mule-maven-plugin</artifactId>
+						<version>2.2.1</version>
+						<configuration>
+							<deploymentType>arm</deploymentType>
+							<username>DB7053</username>
+							<password>Sep#assurant0606</password>
+                            <!-- <businessGroup>POC-Test</businessGroup> -->
+							<uri>https://assurant.okta.com/</uri>
+							<target>ATL-NonProd-Int-Cluster</target>
+							<!-- One of: server, serverGroup, cluster -->
+                             <targetType>server</targetType> 
+							<environment>Sandbox</environment>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		 
+	</profiles>
+	
+	<!-- Mule Dependencies -->
+	<dependencies>
+		<!-- Xml configuration -->
+		<dependency>
+        	<groupId>org.mule</groupId>
+			<artifactId>mule-core</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Xml configuration -->
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-spring-config</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Mule Transports -->
+		<dependency>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-file</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-http</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+        	<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-jdbc</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+        	<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-jms</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.transports</groupId>
+			<artifactId>mule-transport-vm</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Mule Modules -->
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-scripting</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mule.modules</groupId>
+			<artifactId>mule-module-xml</artifactId>
+			<version>3.9.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- for testing -->
+		<dependency>
+			<groupId>org.mule.tests</groupId>
+			<artifactId>mule-tests-functional</artifactId>
+			<version>3.9.0</version>
+			<scope>test</scope>
+		</dependency>
+	<dependency>
+            <groupId>org.mule.modules</groupId>
+            <artifactId>mule-module-apikit</artifactId>
+            <version>3.9.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+ 
+	
+	 <repositories>
+         <repository>
+        <id>mulesoft-releases</id>
+        <name>MuleSoft Repository</name>
+        <url>http://repository.mulesoft.org/releases/</url>
+        <layout>default</layout>
+    </repository>
+    <repository>
+        <id>mulesoft-snapshots</id>
+        <name>MuleSoft Snapshot Repository</name>
+        <url>http://repository.mulesoft.org/snapshots/</url>
+        <layout>default</layout>
+    </repository>
+  <repository>
+  <id>dev-azure.com-azureartifacttest</id>
+  <url>https://pkgs.dev.azure.com/ganeshpalani0332/_packaging/azureArtifactTest/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-release</id>
+            <name>mulesoft release repository</name>
+            <layout>default</layout>
+            <url>http://repository.mulesoft.org/releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+		<repository>
+  <id>dev-azure.com-azureartifacttest</id>
+  <url>https://pkgs.dev.azure.com/ganeshpalani0332/_packaging/azureArtifactTest/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+	</distributionManagement>
+
+</project>
